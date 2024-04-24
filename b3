@@ -119,7 +119,7 @@ def CheckCard(id, email, tok, P):
     }
     req = requests.post('https://www.joomlart.com/member/payment/stripe/cc', headers=hd, data=da)
     er = re.search('<ul class="errors"><li>(.*?)</li></ul>', req.text)
-    if er:
+    if "Error storing customer profile" in er.group(1):
         print(f'Your card was Declined.! : [ {P} ]')
     else:
         print(f' Approved .!! : [ {P} ]')
